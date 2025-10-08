@@ -12,9 +12,23 @@ WORDS = ["jumps", "laziest", "brown", "a", "quick", "fox", "the", "dog", "over"]
 # developed in the Learn reading.
 def my_max(collection, key):
     if not collection:
-        raise ValueError("No empty collections please")
+        raise ValueError("No empty collection, no max")
     
-    return max(collection, key=key)
+    # set max_item and value to be the first index
+    max_item = collection[0]
+    max_value = key(max_item) # as opposed to current_value
+    # current_value = 0
+
+    for index in range(1, len(collection)):
+        item = collection[index]
+        current_value = key(item)
+
+        if current_value > max_value:
+            max_value = current_value
+            max_item = item
+    
+    return max_item
+
 
 # Implement a custom version of filter, called my_filter
 # my_filter takes a function (should_keep) which it will call on every item in
